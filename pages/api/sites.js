@@ -1,21 +1,11 @@
-import db from '@/lib/firebase-admin';
+import { getAllSites } from '@/lib/db-admin';
 
-export default function getSites(req, res) {
-  return db
-    .collection('sites')
-    .get()
-    .then((snapshot) => {
-      const sites = [];
+export default async function (req, res) {
+  const { sites, error } = await getAllSites();
 
-      snapshot.forEach((doc) => {
-        if (doc.exists) {
-          sites.push({ id: doc.id, ...doc.data() });
-        }
-      });
+  if (error) {
+    res.status(500).json({ error });
+  }
 
-      res.status(200).json({ sites });
-    })
-    .catch((err) => {
-      console.error('Error getting document', err);
-    });
+  res.status(200).json({ sites });
 }
