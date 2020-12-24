@@ -24,11 +24,11 @@ export default function AddSiteModal({ children }) {
   const initialRef = useRef();
   const { register, handleSubmit } = useForm();
   const toast = useToast();
-  const auth = useAuth();
+  const { user } = useAuth();
 
   const onCreateSite = async ({ name, url }) => {
     const newSite = {
-      authorId: auth.user.uid,
+      authorId: user.uid,
       createdAt: new Date().toISOString(),
       name,
       url,
@@ -43,7 +43,7 @@ export default function AddSiteModal({ children }) {
       isClosable: true,
     });
     mutate(
-      '/api/sites',
+      ['/api/sites', user.token],
       (data) => {
         return { sites: [...data.sites, { ...newSite, id: newSiteRef.id }] };
       },

@@ -16,6 +16,15 @@ export default function Home() {
       h="100vh"
     >
       <Head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (document.cookie && document.cookie.includes('fastfeedback-auth')) {
+                window.location.href = "/dashboard"
+              }
+            `,
+          }}
+        />
         <title>Fast Feedback</title>
       </Head>
 
