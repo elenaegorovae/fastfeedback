@@ -1,17 +1,7 @@
-import {
-  Flex,
-  Link,
-  Stack,
-  Avatar,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Heading,
-  Button,
-} from '@chakra-ui/react';
+import NextLink from 'next/link';
+import { Flex, Link, Stack, Avatar, Button } from '@chakra-ui/react';
 import { LogoIcon } from '@/styles/theme';
 import { useAuth } from '@/lib/auth';
-import AddSiteModal from './AddSiteModal';
 
 const DashboardShell = ({ children }) => {
   const { user, signout } = useAuth();
@@ -26,9 +16,17 @@ const DashboardShell = ({ children }) => {
         px={8}
       >
         <Stack spacing={4} isInline alignItems="center">
-          <LogoIcon w={8} h={8} />
-          <Link>Sites</Link>
-          <Link>Feedback</Link>
+          <NextLink href="/" passHref>
+            <Link>
+              <LogoIcon w={8} h={8} />
+            </Link>
+          </NextLink>
+          <NextLink href="/dashboard" passHref>
+            <Link>Sites</Link>
+          </NextLink>
+          <NextLink href="/feedback" passHref>
+            <Link>Feedback</Link>
+          </NextLink>
         </Stack>
         <Flex alignItems="center">
           {user && (
@@ -41,17 +39,6 @@ const DashboardShell = ({ children }) => {
       </Flex>
       <Flex backgroundColor="blackAlpha.50" justify="center" flex="1">
         <Flex maxWidth="full" width="800px" flexDirection="column" p={8}>
-          <Breadcrumb>
-            <BreadcrumbItem isCurrentPage>
-              <BreadcrumbLink color="gray.700" fontSize="sm">
-                Sites
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-          <Flex justify="space-between" mb={4}>
-            <Heading mb={4}>My Sites</Heading>
-            <AddSiteModal>+ Add Site</AddSiteModal>
-          </Flex>
           {children}
         </Flex>
       </Flex>

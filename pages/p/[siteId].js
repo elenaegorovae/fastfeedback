@@ -32,7 +32,6 @@ export default function SiteFeedback({ initialFeedback }) {
       text: inputEl.current.value,
       provider: auth.user.provider,
       status: 'pending',
-      rating: 5,
     };
 
     createFeedback(newFeedback)
