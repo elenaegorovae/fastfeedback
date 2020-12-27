@@ -56,7 +56,14 @@ export default function SiteFeedback({ initialFeedback }) {
         <FormControl my={8}>
           <FormLabel htmlFor="comment">Comment</FormLabel>
           <Input type="text" mb={2} ref={inputEl} />
-          <Button type="submit" fontWeight="medium">
+          <Button
+            type="submit"
+            fontWeight="medium"
+            backgroundColor="gray.900"
+            color="white"
+            _hover={{ bg: 'gray.700' }}
+            _active={{ bg: 'gray.800', transform: 'scale(0.95)' }}
+          >
             Add Comment
           </Button>
         </FormControl>
